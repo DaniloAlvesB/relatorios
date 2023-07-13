@@ -180,6 +180,12 @@ function import_json(){
                     localStorage.setItem('note', JSON.stringify(JSON.parse(json_str)))
                 }
             }
+        }else{
+            if(json != ""){
+                localStorage.setItem('note', JSON.stringify(JSON.parse(json)))
+            }else if(json_str != ""){
+                localStorage.setItem('note', JSON.stringify(JSON.parse(json_str)))
+            }
         }
     }
 
