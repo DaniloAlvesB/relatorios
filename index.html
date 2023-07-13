@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atualizações</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+
+<body>
+    
+    <header class="p-3">
+        <h3>Gerador de notas</h3>
+        <p class="mx-2">Gerador de notas de atualização (Teste)*</p>
+    </header>
+    
+    <div class="d-flex flex-wrap">
+        <!-- INFORMAÇÕES DIREITA -->
+        <div class="container d-flex flex-column col-12 col-md-5">
+
+            <label for="title">Título</label>
+            <input type="text" id="title" name="title" class="form-control" maxlength="100" placeholder="Digite um título para a nota...">
+
+            <br>
+
+            <label for="description">Descrição <b>(pode conter tags HTML)</b></label>
+            <textarea name="description" id="description" class="form-control" maxlength="500" placeholder="Descrição breve..."></textarea>
+
+            <div class="container d-flex flex-wrap col-12">
+
+                <div class="enters border rounded-3 my-3 p-3">
+
+                    <h4>Informações</h4>
+
+                    <div class="d-flex flex-column my-3">
+
+                        <!-- CURSO -->
+                        <div class="d-flex flex wrap justify-content-left align-items-center my-1">
+                            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addcurso">
+                                <b>+</b> Inserir curso
+                            </button>
+                        </div>
+
+                        <!-- TÓPICO -->
+                        <div class="d-flex flex wrap justify-content-left align-items-center my-1">
+                            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addtopico">
+                                <b>+</b> Inserir tópico
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- PREVIEW ESQUERDA -->
+        <div class="container col-12 col-md-6">
+            <div class="d-flex flex wrap">
+                <h4>Pré-visualização</h4>
+                <div class="d-flex flex wrap p-2">
+                    <a href="note.html" target="_blank" class="btn btn-warning mx-1">imprimir</a>
+                    <button target="_blank" class="btn btn-primary mx-1" onclick="show_json()" data-bs-toggle="modal" data-bs-target="#json">JSON</button>
+                    <button target="_blank" class="btn btn-success mx-1" data-bs-toggle="modal" data-bs-target="#importjson">Importar</button>
+                </div>
+            </div>
+
+            <div id="note_content" class="border border-secondary rounded-1 p-2">
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- MODAIS -->
+
+    <!-- CURSOS -->
+    <div class="modal fade" id="addcurso" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="addcursoLabel">Inserir curso</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                
+                <div class="d-flex flex-wrap col-12 justify-content-around p-0">
+                    <div class="col-8 m-0">
+                        <label for="curso_name">Nome</label>
+                        <input type="text" id="curso_name" name="curso_name" class="form-control" placeholder="Título...">
+                    </div>
+                    <div class="col-3 m-0">
+                        <label for="curso_hours">Nº de horas</label>
+                        <input type="number" id="curso_hours" name="curso_hours" class="form-control" placeholder="">
+                    </div>
+                </div>
+                <br>
+                    <label for="curso_id">ID</label>
+                    <input type="number" id="curso_id" name="curso_id" class="form-control" placeholder="">
+                <br>
+                <label for="curso_desc">Descrição (opcional)</label>
+                <textarea name="curso_desc" id="curso_desc" class="form-control"></textarea>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" onclick="save_curso()" data-bs-dismiss="modal">Salvar</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TÓPICOS -->
+    <div class="modal fade" id="addtopico" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="addtopicoLabel">Inserir tópico</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                
+                <label for="topic_title">Título</label>
+                <input type="text" id="topic_title" name="topic_title" class="form-control" placeholder="Título...">
+                <br>
+                <label for="topic_content">Conteúdo</label>
+                <textarea name="topic_content" id="topic_content" class="form-control"></textarea>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" onclick="save_topic()" data-bs-dismiss="modal">Salvar</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JSON -->
+    <div class="modal fade" id="json" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="jsonLabel">JSON do relatório</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div id="json_content" class="modal-body">
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="importjson" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="importjsonLabel">Importar relatório via JSON</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div id="importjson_content" class="modal-body">
+                <label for="json_n">JSON</label>
+                <textarea name="json_n" id="json_n" class="form-control"></textarea>
+                <br>
+                <label for="json_s">JSON como string (pode perder dados)</label>
+                <textarea name="json_s" id="json_s" class="form-control"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal" onclick="import_json()">Importar</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<script src="script.js"></script>
+</html>
