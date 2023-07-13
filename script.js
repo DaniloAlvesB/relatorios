@@ -239,4 +239,10 @@ if(window.location.pathname == "/relatorios/note.html"){
     window.print();
 }
 
-console.log(document);
+function delete_report(){
+    if(confirm("Deseja deletar o relatório atualmente em produção?")){
+        localStorage.removeItem('note')
+    }
+}
+
+// console.log(document);
