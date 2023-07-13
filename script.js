@@ -38,7 +38,7 @@ function note_save(){
 }
 
 function note_view(){
-        if(note == null && note == undefined){
+    if(note == null && note == undefined){
         var nota = JSON.parse(localStorage.getItem('note'));
 
         note_content.innerHTML = "";
@@ -166,6 +166,27 @@ function show_json(){
     console.log(JSON.parse(localStorage.getItem('note')))
 }
 
+function import_json(){
+    let json = document.getElementById('json_n').value;
+    let json_str = document.getElementById('json_s').value;
+
+    if(json != "" || json_str != ""){
+        if(localStorage.getItem('note') != null && localStorage.getItem('note') != undefined){
+            if(confirm("Já existe um relatório em produção. Deseja sobrescrever?")){
+                if(json != ""){
+                    localStorage.setItem('note', JSON.stringify(JSON.parse(json)))
+                }else if(json_str != ""){
+                    localStorage.setItem('note', JSON.stringify(JSON.parse(json_str)))
+                }
+            }
+        }
+    }
+
+    document.getElementById('json_n').value = "";
+    document.getElementById('json_s').value = "";
+    note_view();
+}
+
 
 //TOPIC
     function save_topic(){
@@ -216,28 +237,6 @@ function show_json(){
 
 
 //Final
-
-function import_json(){
-    let json = document.getElementById('json_n').value;
-    let json_str = document.getElementById('json_s').value;
-
-    if(json != "" || json_str != ""){
-        if(localStorage.getItem('note') != null && localStorage.getItem('note') != undefined){
-            if(confirm("Já existe um relatório em produção. Deseja sobrescrever?")){
-                if(json != ""){
-                    localStorage.setItem('note', JSON.stringify(JSON.parse(json)))
-                }else if(json_str != ""){
-                    localStorage.setItem('note', JSON.stringify(JSON.parse(json_str)))
-                }
-            }
-        }
-    }
-
-    document.getElementById('json_n').value = "";
-    document.getElementById('json_s').value = "";
-    note_view();
-}
-
 if(window.location.pathname == "/relatorios/note.html"){
     window.print();
 }
