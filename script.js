@@ -13,7 +13,7 @@ if(note == null && note == undefined){
 }
 
 //Initial informations
-if(window.location.pathname == "/index.html"){
+if(window.location.pathname == "/relatorios/"){
     let title = document.getElementById('title');
     let desc = document.getElementById('description');
 
@@ -43,7 +43,7 @@ function note_view(){
     note_content.innerHTML = "";
 
     if(nota.title != null && nota.title != undefined){
-        if(window.location.pathname == "/index.html"){
+        if(window.location.pathname == "/relatorios/"){
             document.getElementById('title').value = note.title;
         }
         note_content.innerHTML += `
@@ -52,7 +52,7 @@ function note_view(){
     }
 
     if(nota.description != null && nota.description != undefined){
-        if(window.location.pathname == "/index.html"){
+        if(window.location.pathname == "/relatorios/"){
             document.getElementById('description').value = note.description;
         }
         note_content.innerHTML += `
@@ -63,7 +63,7 @@ function note_view(){
     //TÓPICS
     if(nota.topics != null && nota.topics != undefined && nota.topics != {} && nota.topics != ""){
 
-        if(window.location.pathname == "/index.html"){
+        if(window.location.pathname == "/relatorios/"){
             // document.getElementById('title').value = note.title;
         }
         
@@ -74,7 +74,7 @@ function note_view(){
             if(topics != ""){
                 var button = ""
 
-                if(window.location.pathname == "/index.html"){
+                if(window.location.pathname == "/relatorios/"){
                     button = `
                         <button class="bg-transparent text-danger border-0 mx-1 pb-2" onclick="remove_topico(${count})">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
@@ -99,7 +99,7 @@ function note_view(){
 
     //CURSOS
     if(nota.cursos != null && nota.cursos != undefined && nota.cursos != {} && nota.cursos != ""){
-        if(window.location.pathname == "/index.html"){
+        if(window.location.pathname == "/relatorios/"){
             // document.getElementById('title').value = note.title;
         }
         
@@ -115,7 +115,7 @@ function note_view(){
         array.forEach(cursos => {
             if(cursos != ""){
                 var button = "";
-                if(window.location.pathname == "/index.html"){
+                if(window.location.pathname == "/relatorios/"){
                     button = `
                         <button class="bg-transparent text-danger border-0 mx-1 pb-2" onclick="remove_curso(${count})">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
@@ -235,7 +235,7 @@ function import_json(){
     note_view();
 }
 
-if(window.location.pathname == "/note.html"){
+if(window.location.pathname == "/relatorios/note.html"){
     window.print();
 }
 
