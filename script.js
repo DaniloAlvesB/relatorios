@@ -243,6 +243,7 @@ function delete_report(){
     if(confirm("Deseja deletar o relatório atualmente em produção?")){
         localStorage.removeItem('note')
     }
+    note_view();
 }
 
 // console.log(document);
