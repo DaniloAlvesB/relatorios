@@ -38,7 +38,8 @@ function note_save(){
 }
 
 function note_view(){
-    if(note == null && note == undefined){
+    var l_nota = localStorage.getItem('note');
+    if(l_nota != null && l_nota != undefined){
         var nota = JSON.parse(localStorage.getItem('note'));
 
         note_content.innerHTML = "";
