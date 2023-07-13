@@ -238,3 +238,5 @@ function import_json(){
 if(window.location.pathname == "/note.html"){
     window.print();
 }
+
+console.log(document);
